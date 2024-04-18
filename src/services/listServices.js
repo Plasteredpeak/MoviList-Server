@@ -21,10 +21,21 @@ exports.getUserList = async (userId) => {
 
 exports.addToList = async (list) => {
   try {
+    const existingList = await List.findOne({
+      where: {
+        userId: list.userId,
+        mediaId: list.mediaId,
+      },
+    });
+
+    if (existingList) {
+      throw new ServiceError("Already in your list", 400);
+    }
+
     const newList = await List.create(list);
 
     if (!newList) {
-      throw new ServiceError("List not created", 500);
+      throw new ServiceError("Could not add Item", 500);
     }
 
     return newList;
@@ -42,7 +53,7 @@ exports.updateList = async (id, list) => {
     });
 
     if (!updatedList) {
-      throw new ServiceError("List not updated", 500);
+      throw new ServiceError("Could not update Item", 500);
     }
 
     return updatedList;
@@ -60,7 +71,7 @@ exports.removeFromList = async (id) => {
     });
 
     if (!removedList) {
-      throw new ServiceError("List not removed", 500);
+      throw new ServiceError("Could not remove Item", 500);
     }
 
     return removedList;

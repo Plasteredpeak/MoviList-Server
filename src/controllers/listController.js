@@ -6,15 +6,9 @@ const listServices = require("../services/listServices");
 
 exports.getUserList = async (req, res) => {
   try {
-    const validation = new Validator(req.params, {
-      userId: "required|integer",
-    });
+    const userId = req.userId;
 
-    if (validation.fails()) {
-      return apiResponse.fail(res, validation.errors, 400);
-    }
-
-    const list = await listServices.getUserList(req.params.userId);
+    const list = await listServices.getUserList(userId);
 
     return apiResponse.success(res, req, list);
   } catch (error) {
@@ -30,7 +24,6 @@ exports.addToList = async (req, res) => {
       image: "required|string",
       title: "required|string",
       releaseDate: "required|string",
-      userId: "required|integer",
       rating: "string",
       userRating: "string",
       status: "required|string|in:completed,planning,watching",
@@ -39,6 +32,8 @@ exports.addToList = async (req, res) => {
     if (validation.fails()) {
       return apiResponse.fail(res, validation.errors, 400);
     }
+
+    req.body.userId = req.userId;
 
     const list = await listServices.addToList(req.body);
 
@@ -58,13 +53,14 @@ exports.updateList = async (req, res) => {
       releaseDate: "string",
       rating: "string",
       userRating: "string",
-      userId: "integer",
       status: "string|in:completed,planning,watching",
     });
 
     if (validation.fails()) {
       return apiResponse.fail(res, validation.errors, 400);
     }
+
+    req.body.userId = req.userId;
 
     const list = await listServices.updateList(req.params.id, req.body);
 
@@ -84,7 +80,7 @@ exports.deleteFromList = async (req, res) => {
       return apiResponse.fail(res, validation.errors, 400);
     }
 
-    const list = await listServices.deleteFromList(req.params.id);
+    const list = await listServices.removeFromList(req.params.id);
 
     return apiResponse.success(res, req, list);
   } catch (error) {
