@@ -18,6 +18,11 @@ const userRoutes = require("./src/routes/userRoutes");
 // Use routes
 app.use("/api/users", userRoutes);
 
+//add / route
+app.get("/", (req, res) => {
+  res.send("Welcome to Movie List Server");
+});
+
 const server = app.listen(PORT, () => {
   console.log(`Server is running on PORT ${PORT}`);
 });
