@@ -65,7 +65,11 @@ exports.login = async (user) => {
 
   return {
     token: token,
-    user: userRecord,
+    user: {
+      userId: userRecord.id,
+      email: userRecord.email,
+      userName: userRecord.userName,
+    },
   };
 };
 

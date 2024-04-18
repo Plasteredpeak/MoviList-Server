@@ -41,10 +41,7 @@ exports.login = async (req, res) => {
 
     const user = await userServices.login(req.body);
 
-    return apiResponse.success(res, req, {
-      username: user.userName,
-      email: user.email,
-    });
+    return apiResponse.success(res, req, user);
   } catch (error) {
     return apiResponse.fail(res, error.message, error.status || 500);
   }
