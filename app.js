@@ -15,10 +15,12 @@ app.use(cookieParser());
 // Import routes
 const userRoutes = require("./src/routes/userRoutes");
 const listRoutes = require("./src/routes/listRoutes");
+const tasteRoutes = require("./src/routes/tasteRoutes");
 
 // Use routes
 app.use("/api/users", userRoutes);
 app.use("/api/list", listRoutes);
+app.use("/api/taste", tasteRoutes);
 
 //add / route
 app.get("/", (req, res) => {
