@@ -87,3 +87,15 @@ exports.deleteFromList = async (req, res) => {
     return apiResponse.fail(res, error.message, error.status || 500);
   }
 };
+
+exports.totalReviews = async (req, res) => {
+  try {
+    const userId = req.userId;
+
+    const totalReviews = await listServices.totalReviews(userId);
+
+    return apiResponse.success(res, req, totalReviews);
+  } catch (error) {
+    return apiResponse.fail(res, error.message, error.status || 500);
+  }
+};

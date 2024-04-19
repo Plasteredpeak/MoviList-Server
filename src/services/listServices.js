@@ -79,3 +79,20 @@ exports.removeFromList = async (id) => {
     throw new ServiceError(error.message, 500);
   }
 };
+
+exports.totalReviews = async (userId) => {
+  try {
+    const totalReviews = await List.count({
+      where: {
+        userId: userId,
+        userReview: {
+          [Op.not]: [null, 0],
+        },
+      },
+    });
+
+    return totalReviews;
+  } catch (error) {
+    throw new ServiceError(error.message, 500);
+  }
+};
