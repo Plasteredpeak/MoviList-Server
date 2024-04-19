@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       compatibility: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.FLOAT,
       },
       userId: {
         type: Sequelize.INTEGER,

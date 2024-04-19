@@ -7,3 +7,5 @@ router.use(authenticateJWT);
 
 router.get("/", tasteController.getUserTaste);
 router.patch("/update", tasteController.updateTaste);
+
+module.exports = router;

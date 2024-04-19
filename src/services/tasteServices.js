@@ -13,6 +13,10 @@ exports.getUserTaste = async (userId) => {
       },
     });
 
+    if (!taste) {
+      throw new ServiceError("Taste not found", 404);
+    }
+
     return taste;
   } catch (error) {
     throw new ServiceError(error.message, 500);

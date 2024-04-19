@@ -20,7 +20,7 @@ exports.updateTaste = async (req, res) => {
   try {
     const validation = new Validator(req.body, {
       reviews: "required|integer",
-      compatibility: "required|integer",
+      compatibility: "required",
     });
 
     if (validation.fails()) {

@@ -17,7 +17,7 @@ module.exports = (sequelize, DataTypes) => {
   Taste.init(
     {
       reviews: DataTypes.INTEGER,
-      compatibility: DataTypes.INTEGER,
+      compatibility: DataTypes.FLOAT,
       userId: DataTypes.INTEGER,
     },
     {
