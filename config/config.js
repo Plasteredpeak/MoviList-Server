@@ -7,7 +7,7 @@ module.exports = {
     password: process.env.RDS_PASSWORD || process.env.DB_PASSWORD,
     database: process.RDS_DB_NAME || process.env.DB_DATABASE,
     dialect: process.env.DB_DIALECT || "mysql",
-    host: process.RDS_HOSTNAME || process.env.DB_HOST,
+    host: process.env.RDS_HOSTNAME || process.env.DB_HOST,
     port: process.env.RDS_PORT || process.env.DB_PORT || 3306,
     ssl: process.env.DB_SSL ? { rejectUnauthorized: false } : false,
   },
